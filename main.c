@@ -69,7 +69,7 @@ while(1)
     {
     digits_task();
 
-    if(hc05_rcv_complete() == 0)
+    if(!hc05_recv_complete())
 	continue;
 
     if(hc05_buff[0] == 'H')
@@ -97,8 +97,6 @@ ETIMSK |= (1<<OCIE3A);
 //--------------------------------------------------
 ISR(TIMER3_COMPA_vect)/*{{{*/
 {
-DBG1_TGL;
-
 s++;
 if(s == 60)
     {
