@@ -57,27 +57,36 @@ else // 24h mode
     h=(tmp1 & 0x0F) + 10*(tmp2 & 0x03);
     */
 
-digits_set_digit(10, POS_BIG1);
-digits_set_digit(10, POS_BIG2);
-digits_set_digit(10, POS_BIG3);
-digits_set_digit(10, POS_BIG4);
-digits_set_digit(10, POS_SMALL1);
-digits_set_digit(10, POS_SMALL2);
+digits_set_digit(0, POS_BIG1);
+digits_set_digit(0, POS_BIG2);
+digits_set_digit(0, POS_BIG3);
+digits_set_digit(0, POS_BIG4);
+digits_set_digit(0, POS_SMALL1);
+digits_set_digit(0, POS_SMALL2);
 digits_set_digit(10, POS_DOTS);
 
 while(1)
     {
     digits_task();
-
     if(!hc05_recv_complete())
 	continue;
 
-    if(hc05_buff[0] == 'H')
-	{
-	TIMSK &=~(1<<OCIE1A);
-	digits_set_digit(1, POS_BIG1);
-	digits_set_digit(1, POS_BIG2);
+    if(hc05_buff[0] != ':')
+	continue;
+
+    if(hc05_buff[1] == 'R')
+	{ // back to clock mode
+	continue;
 	}
+
+    // show scores
+    digits_set_digit(hc05_buff[1] - '0', POS_BIG1);
+    digits_set_digit(hc05_buff[2] - '0', POS_BIG2);
+    digits_set_digit(hc05_buff[3] - '0', POS_SMALL1);
+    digits_set_digit(hc05_buff[4] - '0', POS_SMALL2);
+    digits_set_digit(hc05_buff[5] - '0', POS_BIG3);
+    digits_set_digit(hc05_buff[6] - '0', POS_BIG4);
+    digits_set_digit(3, POS_DOTS);
     };
 }
 
@@ -90,8 +99,8 @@ OCR3A   = 7365;
 
 TCCR3A  = 0x00;
 TCCR3C  = 0x00;
-TCCR3B  = (1<<WGM32) | (1<<CS32) | (1<<CS30);
-ETIMSK |= (1<<OCIE3A);
+//TCCR3B  = (1<<WGM32) | (1<<CS32) | (1<<CS30);
+//ETIMSK |= (1<<OCIE3A);
 }
 /*}}}*/
 //--------------------------------------------------

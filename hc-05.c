@@ -189,11 +189,11 @@ uint8_t rcv=UDR1;
 hc05_buff[hc05_i]=rcv;
 
 hc05_i++;
-if(rcv == '\n' ||
-   rcv == '\r')
+if(rcv == '\n')
     {
     buff_fill=hc05_i;
     hc05_i=0;
+    DBG1_TGL;
     }
 }
 /*}}}*/
