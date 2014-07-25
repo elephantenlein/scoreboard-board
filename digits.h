@@ -18,6 +18,7 @@ enum _positions {
 
 //--------------------------------------------------
 extern void digits_init(void);
+extern void digits_task(void);
 extern void digits_set_digit(uint8_t, uint8_t);
 extern void digits_set_board(uint16_t, uint8_t, uint8_t, uint16_t);
 

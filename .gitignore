@@ -1,4 +1,7 @@
 bin/
 build/
+fuse/d*.hex
+documents/
+misc/
 *.swp
 *.swo

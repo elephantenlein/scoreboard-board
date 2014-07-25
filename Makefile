@@ -1,8 +1,8 @@
 #--------------------------------------------------
 # C.O. says, this is a Makefile
 #--------------------------------------------------
-MCU=atmega32u4
-PROJ=lpa-151
+MCU = atmega64
+PROJ = scoreboard-board
 PROGRAMMER = avrisp2
 #PROGRAMMER = jtag2isp
 
@@ -10,7 +10,7 @@ SECTIONS =
 
 # files
 #--------------------------------------------------
-SOURCES = 
+SOURCES = main digits hc-05 clock
 BUILDDIR = build
 BINDIR = bin
 FUSEDIR = fuse
